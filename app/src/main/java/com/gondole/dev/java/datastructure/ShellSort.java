@@ -5,33 +5,52 @@ package com.gondole.dev.java.datastructure;
  */
 
 public class ShellSort {
+	public static void shellSort(int[] arr) {
+		if (arr == null || arr.length == 0)
+			return;
+		int gapSize = arr.length / 2;
+		while (gapSize >= 1) {
+			shellInsert(arr, gapSize);
+			SortTest.printlnArray(arr);
+			gapSize /= 2;
+		}
+	}
+	
 	/**
 	 * 希尔排序的一趟插入
+	 *
 	 * @param arr 待排数组
-	 * @param d 增量
+	 * @param gapSize   增量
 	 */
-	public static void shellInsert(int[] arr, int d) {
-		for(int i=d; i<arr.length; i++) {
-			int j = i - d;
-			int temp = arr[i];    //记录要插入的数据  
-			while (j>=0 && arr[j]>temp) {  //从后向前，找到比其小的数的位置   
-				arr[j+d] = arr[j];    //向后挪动  
-				j -= d;
+	public static void shellInsert(int[] arr, int gapSize) {
+		System.out.println("");
+		System.out.println("步长大小为：" + gapSize);
+		
+		for (int rightNumIndex = gapSize; rightNumIndex < arr.length; rightNumIndex++) {
+			int leftNumIndex = rightNumIndex - gapSize;
+			
+			int rightNum = arr[rightNumIndex];    //记录要插入的数据  
+
+			System.out.println("比较 ：" + " 索引 " + leftNumIndex + " : " + arr[leftNumIndex] + " vs " + "索引 " + rightNumIndex + " : " + arr[rightNumIndex]);
+			
+			while (leftNumIndex >= 0 && arr[leftNumIndex] > rightNum) {  //从后向前，找到比其小的数的位置   
+				arr[leftNumIndex + gapSize] = arr[leftNumIndex];    //向后挪动  
+				leftNumIndex = leftNumIndex - gapSize;
+			}
+			
+			if (leftNumIndex != rightNumIndex - gapSize) {    //存在比其小的数 
+				arr[leftNumIndex + gapSize] = rightNum;
 			}
 
-			if (j != i - d)    //存在比其小的数 
-				arr[j+d] = temp;
-
+//			sortAndSwap(arr, leftNumIndex, rightNumIndex);
 		}
 	}
 
-	public static void shellSort(int[] arr) {
-		if(arr == null || arr.length == 0)
-			return ;
-		int d = arr.length / 2;
-		while(d >= 1) {
-			shellInsert(arr, d);
-			d /= 2;
+	public static void sortAndSwap(int[] arr, int left, int right) {
+		int rightNum = arr[right];
+		if (arr[left] > rightNum) {
+			arr[right] = arr[left];
+			arr[left] = rightNum;
 		}
 	}
 }
