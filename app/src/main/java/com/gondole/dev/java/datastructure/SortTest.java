@@ -5,20 +5,24 @@ package com.gondole.dev.java.datastructure;
  */
 public class SortTest {
 	public static void main(String[] args) {
-//		int[] arr = {2, 5, 3, 8};
+//		int[] arr = {2, 5, 3, 8, 1};
+//		int[] arr = {5,3,8,6,4};
 //		int[] arr = {6, 5, 3, 1, 8, 7, 2, 4, 2};
 //		int[] arr = {49,38,65,97,76,13,27,49};
 		int[] arr = {1,3,4,5,7,2,6,8,0};
 		
 		System.out.println("初始数组为：" + SortTest.print(arr));
+		System.out.println("");
 		
 //		BubbleSort.bubbleSort(arr);	//冒泡排序
 //		SelectSort.selectSort(arr);	//选择排序
 //		InsertSort.insertSort(arr);	//插入排序
-//		QuickSort.sort(arr);		//快速排序
-		HeapSort.heapSort(arr);		//堆排序
+		
+		QuickSort.sort(arr);		//快速排序
+//		HeapSort.heapSort(arr);		//堆排序
 //		ShellSort.shellSort(arr);	//希尔排序
-//		MergeSort.mergeSort(arr);	//归并排序
+//		
+		// MergeSort.mergeSort(arr);	//归并排序
 //		CountSort.countSort(arr);	//计数排序
 //		BucketSort.bucketSort(arr);	//桶排序
 //		RadixSort.radixSort(arr);	//基数排序
@@ -37,6 +41,16 @@ public class SortTest {
 		return sb.toString();
 	}
 
+	public static String print(int[] arr, int left, int right) {
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = left; i <= right; i++) {
+			sb.append(arr[i] + " ");
+		}
+
+		return sb.toString();
+	}
+	
 	public static void printlnArray(int[] arr) {
 		StringBuilder sb = new StringBuilder();
 
@@ -46,5 +60,10 @@ public class SortTest {
 
 		System.out.println("");
 		System.out.println(sb.toString());
+		System.out.println("");
+	}
+	
+	public static void println(String content) {
+		System.out.println(content);
 	}
 }

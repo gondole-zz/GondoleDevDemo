@@ -2,6 +2,8 @@ package com.gondole.dev.java.datastructure;
 
 
 import static com.gondole.dev.java.datastructure.SortTest.print;
+import static com.gondole.dev.java.datastructure.SortTest.println;
+import static com.gondole.dev.java.datastructure.SortTest.printlnArray;
 
 /**
  * Created by dell on 2017/5/19.
@@ -24,12 +26,16 @@ public class QuickSort {
 	 */
 	public static void quickSort(int[] arr, int left, int right) {
 
-		System.out.println("quickSort：" + print(arr));
+		System.out.println("递归划分子序列：" + print(arr, left, right));
 
 		if (left >= right) {
+			println("长度只有1，无需排序");
+			println("");
 			return;
 		}
+		
 		int pivotPos = partition(arr, left, right);
+		
 		quickSort(arr, left, pivotPos - 1);
 		quickSort(arr, pivotPos + 1, right);
 	}
@@ -52,22 +58,35 @@ public class QuickSort {
 	 */
 	public static int partition(int[] arr, int left, int right) {
 		int pivotKey = arr[left];
-
+	
+		println("基准数为：" + pivotKey);
+		
 		while (left < right) {
 			while (left < right && arr[right] >= pivotKey) {
 				right--;
 			}
-			arr[left] = arr[right]; //把小的数字移动到左边
-			System.out.println(print(arr));
+			
+			if (left < right) {
+				arr[left] = arr[right]; //把小的数字移动到左边
+				System.out.println(print(arr));
+			}
 			
 			while (left < right && arr[left] <= pivotKey) {
 				left++;
 			}
-			arr[right] = arr[left]; //把大的移动到右边
-			System.out.println(print(arr));
+			
+			if (left < right) {
+				arr[right] = arr[left]; //把大的移动到右边
+				System.out.println(print(arr));
+			}
 		}
+
+		println("把基准数赋值到arr[" + left + "]");
+		
+		//当left = right时两指针相遇
 		arr[left] = pivotKey; //最后把pivot赋值到中间
-		System.out.println(print(arr));
+		
+		printlnArray(arr);
 		
 		return left;
 	}

@@ -1,5 +1,7 @@
 package com.gondole.dev.java.datastructure;
 
+import static com.gondole.dev.java.datastructure.SortTest.printlnArray;
+
 /**
  * Created by dell on 2017/5/19.
  */
@@ -9,33 +11,21 @@ public class InsertSort {
 		if (arr == null || arr.length == 0)
 			return;
 
+		//假设第一个数位置时正确的；要往后移，必须要假设第一个。
+		for (int itemIndex = 1; itemIndex < arr.length; itemIndex++) { 
 
-//		for (int i = 1; i < arr.length; i++) {
-//			int j = i;
-//			int target = arr[i];
-//			
-//			while (j > 0 && target < arr[j - 1]) {
-//				arr[j] = arr[j - 1];
-//				j--;
-//			}
-//			
-//			arr[j] = target;
-//		}
-		
-		for (int i = 1; i < arr.length; i++) { //假设第一个数位置时正确的；要往后移，必须要假设第一个。
+			int j = itemIndex;
+			int target = arr[itemIndex]; //待插入的目标数字
 
-			int j = i;
-			int target = arr[i]; //待插入的
-
-			//后移
 			while (j > 0 && target < arr[j - 1]) {
 				arr[j] = arr[j - 1];
 				j--;
+				printlnArray(arr);
 			}
 
 			//插入 
 			arr[j] = target;
-			System.out.println(SortTest.print(arr));
+			printlnArray(arr);
 		}
 	}
 }
